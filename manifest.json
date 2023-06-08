@@ -8,10 +8,6 @@
   "theme_color": "#673ab8",
   "icons": [
     {
-    }
-  ]
-  "icons": [
-    {
       "src": "/receipts/assets/icon.png",
       "type": "image/png",
       "purpose": "maskable",

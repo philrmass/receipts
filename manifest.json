@@ -1,0 +1,26 @@
+{
+  "name": "receipts",
+  "short_name": "receipts",
+  "start_url": "/receipts/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#fff",
+  "theme_color": "#673ab8",
+  "icons": [
+    {
+    }
+  ]
+  "icons": [
+    {
+      "src": "/receipts/assets/icon.png",
+      "type": "image/png",
+      "purpose": "maskable",
+      "sizes": "512x512"
+    },
+    {
+      "src": "/receipts/assets/icon.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ]
+}

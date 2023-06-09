@@ -1,0 +1,14 @@
+:root {
+  --font: "Rubik", sans-serif;
+  --title-font: "Merriweather", serif;
+}
+
+@font-face {
+  font-family: Rubik;
+  src: url("../assets/Rubik-VariableFont_wght.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: Merriweather;
+  src: url("../assets/Merriweather-Regular.ttf") format("truetype");
+}

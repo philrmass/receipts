@@ -1,9 +1,15 @@
-html, body {
-  font: 14px/1.21 'Helvetica Neue', arial, sans-serif;
-  font-weight: 400;
+@import url("./styles/fonts.css");
+
+html,
+body {
   color: #282828;
+  font-family: var(--font);
+  font-size: 16px;
+  font-weight: 400;
 }
 
 h1 {
   color: #555657;
+  font-family: var(--title-font);
+  font-size: 22px;
 }

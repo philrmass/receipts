@@ -1,7 +1,7 @@
 # Receipts
 by Phil Mass
 
-Deployed at []()
+Deployed at [https://philrmass.github.io/receipts/](https://philrmass.github.io/receipts/)
 
 # Setup
 ```

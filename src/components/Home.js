@@ -1,23 +1,54 @@
-import { useEffect, useState } from 'preact/hooks';
 import { useLocalStorage } from 'utilities/hooks';
 import { version } from '../../package.json';
-import styles from './Home.module.css';
+import Enter from './Enter';
+import Exit from './Exit';
+import Names from './Names';
 
 export default function Home() {
-  const [count, setCount] = useState(0);
-  const [max, setMax] = useLocalStorage('xMax', 0);
+  const [shown, setShown] = useLocalStorage('rcShown', 'enter');
+  const [name, setName] = useLocalStorage('rcNames', null);
+  const [recentNames, setRecentNames] = useLocalStorage('rcNames', []);
+  const [names, setNames] = useLocalStorage('rcNames', []);
+  const [receipts, setReceipts] = useLocalStorage('rcReceipts', []);
 
-  useEffect(() => {
-    setMax((m) => count > m ? count : m);
-  }, [count, setMax]);
+  const updateName = (value) => {
+    setName(value);
+    setRecentNames([]);
+    setNames([]);
+  };
 
-  return (
-    <div className={styles.home}>
-      <h1>Home</h1>
-      <div>{`Count: ${count}`}</div>
-      <div>{`Max: ${max}`}</div>
-      <button onClick={() => setCount((c) => c + 1)}>Add</button>
-      <div>{`v${version}`}</div>
-    </div>
-  );
+  const renderComponent = () => {
+    switch (shown) {
+      case 'exit': 
+        return (
+          <Exit
+            receipts={receipts}
+            setReceipts={setReceipts}
+            showEnter={() => setShown('enter')}
+          />
+        );
+      case 'names': 
+        return (
+          <Names
+            onClose={() => setShown('enter')}
+            name={name}
+            names={names}
+            recentNames={recentNames}
+            setName={updateName}
+          />
+        );
+      default:
+        return (
+          <Enter
+            receipts={receipts}
+            setReceipts={setReceipts}
+            showExit={() => setShown('exit')}
+            showNames={() => setShown('names')}
+            version={version}
+          />
+        );
+    }
+  };
+
+  return renderComponent();
 }

@@ -35,6 +35,20 @@ export default function Home() {
       setAmount(null);
       setName(null);
     }
+
+    setNames((all) => {
+      const filtered = all.filter((n) => n.toLowerCase() !== name.toLowerCase());
+      const sorted = [...filtered, name].sort();
+      return sorted;
+    });
+
+    const recentMax = 5;
+    setRecentNames((recent) => {
+      const filtered = recent.filter((n) => n.toLowerCase() !== name.toLowerCase());
+      const added = [name, ...filtered];
+      const sliced = added.slice(0, recentMax);
+      return sliced;
+    });
   };
 
   const removeLastReceipt = () => {
@@ -43,8 +57,6 @@ export default function Home() {
 
   const updateName = (value) => {
     setName(value);
-    setRecentNames([]);
-    setNames([]);
   };
 
   const renderComponent = () => {

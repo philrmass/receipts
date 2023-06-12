@@ -1,15 +1,16 @@
+@import url("./styles/colors.css");
 @import url("./styles/fonts.css");
+
+:root {
+  --font-size: 16px;
+}
 
 html,
 body {
-  color: #282828;
+  color: var(--text);
   font-family: var(--font);
-  font-size: 16px;
+  font-size: var(--font-size);
   font-weight: 400;
-}
-
-h1 {
-  color: #555657;
-  font-family: var(--title-font);
-  font-size: 22px;
+  margin: 0;
+  padding: 0;
 }

@@ -1,3 +1,28 @@
 .exit {
   background: #dfd;
 }
+
+.buttons {
+  margin-top: 32px;
+}
+
+.last {
+  padding: 16px;
+  margin-top: 32px;
+  font-size: 26px;
+}
+
+.top {
+  display: flex;
+  gap: 1em;
+}
+
+.bottom {
+  display: flex;
+  justify-content: space-between;
+}
+
+.amount {
+  font-size: 34px;
+  margin-top: 8px;
+}

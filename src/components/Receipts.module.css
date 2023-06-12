@@ -1,0 +1,9 @@
+.receipts {
+  margin-top: 32px;
+  padding: 16px;
+}
+
+.receipts td {
+  padding-right: 8px;
+}
+

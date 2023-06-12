@@ -37,6 +37,11 @@ export default function Enter({
 
   return (
     <div className={styles.enter}>
+      <div className={styles.buttons}>
+        <button disabled={receipts.length === 0} onClick={showExit}>
+          Remove Receipts
+        </button>
+      </div>
       <div className={styles.title}>
         <div>Receipts</div>
         <div className={styles.version}>
@@ -83,11 +88,6 @@ export default function Enter({
             Add
           </button>
         </div>
-      </div>
-      <div className={styles.buttons}>
-        <button disabled={receipts.length === 0} onClick={showExit}>
-          Remove Receipts
-        </button>
       </div>
     </div>
   );

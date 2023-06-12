@@ -35,11 +35,11 @@ export default function Exit({
 
   return (
     <div className={styles.exit}>
-      <Receipts receipts={receipts} />
-      {renderLast()}
       <div className={styles.buttons}>
         <button onClick={showEnter}>Add Receipts</button>
       </div>
+      <Receipts receipts={receipts} />
+      {renderLast()}
     </div>
   );
 }

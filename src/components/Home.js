@@ -5,6 +5,9 @@ import Enter from './Enter';
 import Exit from './Exit';
 import Names from './Names';
 
+// ??? sort receipts by date
+// ??? select name input on open
+// ??? clear amount on enter
 export default function Home() {
   const [shown, setShown] = useLocalStorage('rcShown', 'enter');
   const [amount, setAmount] = useLocalStorage('rcAmount', null);

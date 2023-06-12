@@ -10,7 +10,14 @@ export default function Names({
 }) {
   const [nameStr, setNameStr] = useState(name);
 
+  const handleClose = () => {
+    console.log('  CLOSE', name);
+    setName(name);
+    onClose();
+  };
+
   const handleSave = (value) => {
+    console.log('  SAVE', value);
     setName(value);
     onClose();
   };
@@ -41,7 +48,7 @@ export default function Names({
           </div>
         )) }
       </div>
-      <button onClick={onClose}>Close</button>
+      <button onClick={() => handleClose()}>Close</button>
       <button onClick={() => handleSave(nameStr)}>Save</button>
     </div>
   );

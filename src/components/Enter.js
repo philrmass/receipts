@@ -50,7 +50,13 @@ export default function Enter({
           value={date}
           onChange={(e) => setDate(e.target.value)}
         />
-        <div onClick={showNames}>{name ?? 'Vendor'}</div>
+        <input 
+          className={styles.name}
+          type="text"
+          placeholder='Vendor'
+          value={name}
+          onClick={showNames}
+        />
         <span>$</span>
         <input 
           className={styles.amount}

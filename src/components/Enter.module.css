@@ -29,6 +29,11 @@ input {
   border: 0;
 }
 
+.name {
+  background: transparent;
+  border: 0;
+}
+
 .amount {
   background: transparent;
   border: 0;

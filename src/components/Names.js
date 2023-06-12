@@ -11,7 +11,7 @@ export default function Names({
   const [nameStr, setNameStr] = useState(name);
 
   const handleSave = (value) => {
-    setName(value);
+    setName(value?.trim());
     onClose();
   };
 

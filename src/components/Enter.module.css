@@ -15,8 +15,13 @@
   color: var(--grey);
 }
 
+.bottom {
+  display: flex;
+  justify-content: space-between;
+}
+
 .controls {
-  margin-top: 32px;
+  padding: 16px;
 }
 
 input {
@@ -40,5 +45,5 @@ input {
 }
 
 .buttons {
-  margin-top: 32px;
+  padding: 16px;
 }

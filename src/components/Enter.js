@@ -43,39 +43,47 @@ export default function Enter({
           {`v${version}`}
         </div>
       </div>
-      <div className={styles.controls}>
-        <input
-          className={styles.date}
-          type='date'
-          value={date}
-          onChange={(e) => setDate(e.target.value)}
-        />
-        <input 
-          className={styles.name}
-          type="text"
-          placeholder='Vendor'
-          value={name}
-          onClick={showNames}
-        />
-        <span>$</span>
-        <input 
-          className={styles.amount}
-          type="text"
-          maxLength={amountDigits}
-          size={amountDigits}
-          placeholder="0.00"
-          value={amountStr}
-          onInput={(e) => setAmountStr(e.target.value)}
-          onChange={(e) => parseAmount(e.target.value)}
-        />
-        <button
-          disabled={!isValid}
-          onClick={() => addReceipt(date, name, amount)}
-        >
-          Add
-        </button>
-      </div>
       <Receipts receipts={receipts} />
+      <div className={styles.controls}>
+        <div>
+          <input
+            className={styles.date}
+            type='date'
+            value={date}
+            onChange={(e) => setDate(e.target.value)}
+          />
+        </div>
+        <div>
+          <input 
+            className={styles.name}
+            type="text"
+            placeholder='Vendor'
+            value={name}
+            onClick={showNames}
+          />
+        </div>
+        <div className={styles.bottom}>
+          <div>
+            <span>$</span>
+            <input 
+              className={styles.amount}
+              type="text"
+              maxLength={amountDigits}
+              size={amountDigits}
+              placeholder="0.00"
+              value={amountStr}
+              onInput={(e) => setAmountStr(e.target.value)}
+              onChange={(e) => parseAmount(e.target.value)}
+            />
+          </div>
+          <button
+            disabled={!isValid}
+            onClick={() => addReceipt(date, name, amount)}
+          >
+            Add
+          </button>
+        </div>
+      </div>
       <div className={styles.buttons}>
         <button disabled={receipts.length === 0} onClick={showExit}>
           Remove Receipts

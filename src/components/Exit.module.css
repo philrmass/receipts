@@ -3,12 +3,11 @@
 }
 
 .buttons {
-  margin-top: 32px;
+  padding: 16px;
 }
 
 .last {
   padding: 16px;
-  margin-top: 32px;
   font-size: 26px;
 }
 

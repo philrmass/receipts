@@ -10,16 +10,17 @@ export default function Names({
 }) {
   const [nameStr, setNameStr] = useState(name);
 
-  const handleClose = () => {
-    console.log('  CLOSE', name);
-    setName(name);
+  const handleSave = (value) => {
+    setName(value);
     onClose();
   };
 
-  const handleSave = (value) => {
-    console.log('  SAVE', value);
-    setName(value);
-    onClose();
+  const handleKeyDown = (key, value) => {
+    if (key === 'Enter') {
+      handleSave(value);
+    } else if (key === 'Escape') {
+      onClose();
+    }
   };
 
   return (
@@ -30,7 +31,7 @@ export default function Names({
         value={nameStr}
         placeholder='Vendor'
         onInput={(e) => setNameStr(e.target.value)}
-        onChange={(e) => handleSave(e.target.value)}
+        onKeyDown={(e) => handleKeyDown(e.key, e.target.value)}
       />
       <div className={styles.names}>
         <div className={styles.title}>Recent</div>
@@ -48,7 +49,7 @@ export default function Names({
           </div>
         )) }
       </div>
-      <button onClick={() => handleClose()}>Close</button>
+      <button onClick={() => onClose()}>Close</button>
       <button onClick={() => handleSave(nameStr)}>Save</button>
     </div>
   );

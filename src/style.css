@@ -3,6 +3,7 @@
 
 :root {
   --font-size: 16px;
+  --font-size-large: 24px;
 }
 
 html,
@@ -13,4 +14,13 @@ body {
   font-weight: 400;
   margin: 0;
   padding: 0;
+}
+
+button {
+  background: var(--green);
+  border: 0;
+  border-radius: 4px;
+  color: white;
+  font-size: var(--font-size);
+  padding: 8px 16px;
 }

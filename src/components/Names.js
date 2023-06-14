@@ -43,6 +43,7 @@ export default function Names({
       </div>
       <input 
         className={styles.name}
+        autofocus
         type="text"
         value={nameStr}
         placeholder='Vendor'

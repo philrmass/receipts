@@ -1,13 +1,10 @@
 import { useEffect } from 'preact/hooks';
 import { useLocalStorage } from 'utilities/hooks';
 import { byDate } from '../utilities';
-import { version } from '../../package.json';
 import Enter from './Enter';
 import Exit from './Exit';
 import Names from './Names';
 
-// ??? select name input on open
-// ??? clear amountStr on enter
 export default function Home() {
   const [shown, setShown] = useLocalStorage('rcShown', 'enter');
   const [amount, setAmount] = useLocalStorage('rcAmount', null);
@@ -95,7 +92,6 @@ export default function Home() {
             setDate={setDate}
             showExit={() => setShown('exit')}
             showNames={() => setShown('names')}
-            version={version}
           />
         );
     }

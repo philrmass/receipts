@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'preact/hooks';
 import Receipts from './Receipts';
+import Title from './Title';
 import styles from './Enter.module.css';
 
 export default function Enter({
@@ -12,8 +13,8 @@ export default function Enter({
   setDate,
   showExit,
   showNames,
-  version,
 }) {
+  const buttonEnabled = receipts.length > 0;
   const amountDigits = 8;
   const [amountStr, setAmountStr] = useState(amount?.toFixed(2) ?? '');
   const isValid = date && name && amountStr;
@@ -36,29 +37,39 @@ export default function Enter({
   };
 
   return (
-    <div className={styles.enter}>
-      <div className={styles.buttons}>
-        <button disabled={receipts.length === 0} onClick={showExit}>
-          Remove Receipts
-        </button>
-      </div>
+    <div className={styles.main}>
       <div className={styles.title}>
-        <div>Receipts</div>
-        <div className={styles.version}>
-          {`v${version}`}
-        </div>
+        <Title
+          buttonEnabled={buttonEnabled} 
+          showExit={showExit}
+        />
       </div>
-      <Receipts receipts={receipts} />
+      <div className={styles.receipts}>
+        <Receipts receipts={receipts} />
+      </div>
       <div className={styles.controls}>
-        <div>
-          <input
-            className={styles.date}
-            type='date'
-            value={date}
-            onChange={(e) => setDate(e.target.value)}
-          />
-        </div>
-        <div>
+        <div className={styles.inputs}>
+          <div className={styles.top}>
+            <input
+              className={styles.date}
+              type='date'
+              value={date}
+              onChange={(e) => setDate(e.target.value)}
+            />
+            <div>
+              <span>$</span>
+              <input 
+                className={styles.amount}
+                type="text"
+                maxLength={amountDigits}
+                size={amountDigits}
+                placeholder="0.00"
+                value={amountStr}
+                onInput={(e) => setAmountStr(e.target.value)}
+                onChange={(e) => parseAmount(e.target.value)}
+              />
+            </div>
+          </div>
           <input 
             className={styles.name}
             type="text"
@@ -67,20 +78,7 @@ export default function Enter({
             onClick={showNames}
           />
         </div>
-        <div className={styles.bottom}>
-          <div>
-            <span>$</span>
-            <input 
-              className={styles.amount}
-              type="text"
-              maxLength={amountDigits}
-              size={amountDigits}
-              placeholder="0.00"
-              value={amountStr}
-              onInput={(e) => setAmountStr(e.target.value)}
-              onChange={(e) => parseAmount(e.target.value)}
-            />
-          </div>
+        <div className={styles.button}>
           <button
             disabled={!isValid}
             onClick={() => addReceipt(date, name, amount)}

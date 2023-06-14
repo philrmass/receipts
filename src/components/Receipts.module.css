@@ -1,8 +1,17 @@
 .receipts {
   padding: 16px;
+  font-size: var(--font-size-medium);
 }
 
-.receipts td {
-  padding-right: 8px;
+.receipt {
+  padding: 8px 0;
 }
 
+.receipt + .receipt {
+  border-top: 1px solid var(--light-green);
+}
+
+.date {
+  display: flex;
+  gap: 32px;
+}

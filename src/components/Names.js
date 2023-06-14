@@ -25,22 +25,6 @@ export default function Names({
 
   return (
     <div className={styles.main}>
-      <input 
-        className={styles.name}
-        type="text"
-        value={nameStr}
-        placeholder='Vendor'
-        onInput={(e) => setNameStr(e.target.value)}
-        onKeyDown={(e) => handleKeyDown(e.key, e.target.value)}
-      />
-      <div className={styles.names}>
-        <div className={styles.title}>Recent</div>
-        { recentNames.map((n) => (
-          <div key={n} onClick={() => handleSave(n)}>
-            { n }
-          </div>
-        )) }
-      </div>
       <div className={styles.names}>
         <div className={styles.title}>All</div>
         { names.map((n) => (
@@ -49,6 +33,22 @@ export default function Names({
           </div>
         )) }
       </div>
+      <div className={styles.names}>
+        <div className={styles.title}>Recent</div>
+        { recentNames.map((n) => (
+          <div key={n} onClick={() => handleSave(n)}>
+            { n }
+          </div>
+        )) }
+      </div>
+      <input 
+        className={styles.name}
+        type="text"
+        value={nameStr}
+        placeholder='Vendor'
+        onInput={(e) => setNameStr(e.target.value)}
+        onKeyDown={(e) => handleKeyDown(e.key, e.target.value)}
+      />
       <button onClick={() => onClose()}>Close</button>
       <button onClick={() => handleSave(nameStr)}>Save</button>
     </div>

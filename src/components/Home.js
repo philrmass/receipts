@@ -1,13 +1,13 @@
 import { useEffect } from 'preact/hooks';
 import { useLocalStorage } from 'utilities/hooks';
+import { byDate } from '../utilities';
 import { version } from '../../package.json';
 import Enter from './Enter';
 import Exit from './Exit';
 import Names from './Names';
 
-// ??? sort receipts by date
 // ??? select name input on open
-// ??? clear amount on enter
+// ??? clear amountStr on enter
 export default function Home() {
   const [shown, setShown] = useLocalStorage('rcShown', 'enter');
   const [amount, setAmount] = useLocalStorage('rcAmount', null);
@@ -27,14 +27,15 @@ export default function Home() {
 
   const addReceipt = (date, name, amount) => {
     if (date && name && amount) {
-      setReceipts([
-        ...receipts, 
+      const all = [
         {
           date,
           name,
           amount,
         },
-      ]);
+        ...receipts, 
+      ];
+      setReceipts(all.sort(byDate));
       setAmount(null);
       setName(null);
     }
@@ -48,7 +49,7 @@ export default function Home() {
     const recentMax = 5;
     setRecentNames((recent) => {
       const filtered = recent.filter((n) => n.toLowerCase() !== name.toLowerCase());
-      const added = [name, ...filtered];
+      const added = [...filtered, name];
       const sliced = added.slice(0, recentMax);
       return sliced;
     });

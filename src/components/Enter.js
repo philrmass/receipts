@@ -49,27 +49,12 @@ export default function Enter({
       </div>
       <div className={styles.controls}>
         <div className={styles.inputs}>
-          <div className={styles.top}>
-            <input
-              className={styles.date}
-              type='date'
-              value={date}
-              onChange={(e) => setDate(e.target.value)}
-            />
-            <div>
-              <span>$</span>
-              <input 
-                className={styles.amount}
-                type="text"
-                maxLength={amountDigits}
-                size={amountDigits}
-                placeholder="0.00"
-                value={amountStr}
-                onInput={(e) => setAmountStr(e.target.value)}
-                onChange={(e) => parseAmount(e.target.value)}
-              />
-            </div>
-          </div>
+          <input
+            className={styles.date}
+            type='date'
+            value={date}
+            onChange={(e) => setDate(e.target.value)}
+          />
           <input 
             className={styles.name}
             type="text"
@@ -77,6 +62,19 @@ export default function Enter({
             value={name}
             onClick={showNames}
           />
+          <div>
+            <span>$</span>
+            <input 
+              className={styles.amount}
+              type="text"
+              maxLength={amountDigits}
+              size={amountDigits}
+              placeholder="0.00"
+              value={amountStr}
+              onInput={(e) => setAmountStr(e.target.value)}
+              onChange={(e) => parseAmount(e.target.value)}
+            />
+          </div>
         </div>
         <div className={styles.button}>
           <button

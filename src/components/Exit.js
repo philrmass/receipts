@@ -1,4 +1,5 @@
 import Receipts from './Receipts';
+import Title from './Title';
 import styles from './Exit.module.css';
 
 export default function Exit({
@@ -17,14 +18,12 @@ export default function Exit({
 
     return (
       <div className={styles.last}>
-        <div className={styles.top}>
+        <div className={styles.values}>
           <div>{ dateStr }</div>
           <div>{ last.name }</div>
+          <span>${last.amount.toFixed(2)}</span>
         </div>
-        <div className={styles.bottom}>
-          <div className={styles.amount}>
-            <span>${last.amount.toFixed(2)}</span>
-          </div>
+        <div className={styles.button}>
           <button onClick={removeLastReceipt}>
             Remove
           </button>
@@ -34,11 +33,13 @@ export default function Exit({
   };
 
   return (
-    <div className={styles.exit}>
-      <div className={styles.buttons}>
-        <button onClick={showEnter}>Add Receipts</button>
+    <div className={styles.main}>
+      <div className={styles.title}>
+        <Title showEnter={showEnter} />
       </div>
-      <Receipts receipts={receipts} />
+      <div className={styles.receipts}>
+        <Receipts receipts={receipts} />
+      </div>
       {renderLast()}
     </div>
   );

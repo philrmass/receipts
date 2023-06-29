@@ -5,6 +5,7 @@ import Enter from './Enter';
 import Exit from './Exit';
 import Names from './Names';
 
+// ??? filter Names names on text input
 export default function Home() {
   const [shown, setShown] = useLocalStorage('rcShown', 'enter');
   const [amount, setAmount] = useLocalStorage('rcAmount', null);
@@ -46,7 +47,7 @@ export default function Home() {
     const recentMax = 5;
     setRecentNames((recent) => {
       const filtered = recent.filter((n) => n.toLowerCase() !== name.toLowerCase());
-      const added = [...filtered, name];
+      const added = [name, ...filtered];
       const sliced = added.slice(0, recentMax);
       return sliced;
     });

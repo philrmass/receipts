@@ -1,27 +1,34 @@
-.exit {
-  background: #dfd;
+.main {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  inset: 0;
 }
 
-.buttons {
-  padding: 16px;
+.title {
+  flex-shrink: 0;
+}
+
+.receipts {
+  flex-grow: 1;
+  overflow-y: auto;
 }
 
 .last {
+  flex-shrink: 0;
   padding: 16px;
-  font-size: 26px;
+  font-size: var(--font-size-large);
+  box-shadow:
+    0 -2px 5px 0 rgb(0 0 0 / 12%),
+    0 -3px 10px 0 rgb(0 0 0 / 16%);
 }
 
-.top {
+.values {
   display: flex;
-  gap: 1em;
+  flex-direction: column;
+  gap: 8px;
 }
 
-.bottom {
-  display: flex;
-  justify-content: space-between;
-}
-
-.amount {
-  font-size: 34px;
-  margin-top: 8px;
+.button {
+  margin-top: 16px;
 }

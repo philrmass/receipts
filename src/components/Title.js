@@ -2,7 +2,7 @@ import { version } from '../../package.json';
 import styles from './Title.module.css';
 
 export default function Title({
-  buttonEnabled,
+  buttonEnabled = true,
   showEnter,
   showExit,
 }) {

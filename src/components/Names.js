@@ -23,35 +23,46 @@ export default function Names({
     }
   };
 
+  const renderNames = (names) => (
+    <>
+      { names.map((value) => (
+        <div
+          key={value}
+          className={styles.name}
+          onClick={() => handleSave(value)}
+        >
+          {value}
+        </div>
+      )) }
+    </>
+  );
+
   return (
     <div className={styles.main}>
-      <div className={styles.names}>
+      <div className={styles.content}>
         <div className={styles.title}>All</div>
-        { names.map((n) => (
-          <div key={n} onClick={() => handleSave(n)}>
-            { n }
-          </div>
-        )) }
-      </div>
-      <div className={styles.names}>
+        <div className={styles.all}>
+          { renderNames(names) }
+        </div>
         <div className={styles.title}>Recent</div>
-        { recentNames.map((n) => (
-          <div key={n} onClick={() => handleSave(n)}>
-            { n }
+        <div className={styles.recent}>
+          { renderNames(recentNames) }
+        </div>
+        <div className={styles.controls}>
+          <input 
+            autofocus
+            type="text"
+            value={nameStr}
+            placeholder='Vendor'
+            onInput={(e) => setNameStr(e.target.value)}
+            onKeyDown={(e) => handleKeyDown(e.key, e.target.value)}
+          />
+          <div className={styles.buttons}>
+            <button onClick={() => onClose()}>Close</button>
+            <button onClick={() => handleSave(nameStr)}>Save</button>
           </div>
-        )) }
+        </div>
       </div>
-      <input 
-        className={styles.name}
-        autofocus
-        type="text"
-        value={nameStr}
-        placeholder='Vendor'
-        onInput={(e) => setNameStr(e.target.value)}
-        onKeyDown={(e) => handleKeyDown(e.key, e.target.value)}
-      />
-      <button onClick={() => onClose()}>Close</button>
-      <button onClick={() => handleSave(nameStr)}>Save</button>
     </div>
   );
 }

@@ -1,12 +1,60 @@
 .main {
-  background: #dfe;
+  position: fixed;
+  inset: 0;
+  background: var(--dark-grey);
+  padding: 24px;
+}
+
+.content {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  border-radius: 4px;
+  background: white;
 }
 
 .title {
-  font-size: 20px;
+  flex-shrink: 0;
+  padding: 16px 16px 4px;
   color: var(--grey);
+  font-size: var(--font-size-small);
+  text-transform: uppercase;
 }
 
-.names {
+.all {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  overflow-y: auto;
+}
+
+.all + .title {
+  margin-top: 8px;
+}
+
+.recent {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.controls {
+  margin-top: 8px;
+  flex-shrink: 0;
   padding: 16px;
+  box-shadow:
+    0 -2px 5px 0 rgb(0 0 0 / 12%),
+    0 -3px 10px 0 rgb(0 0 0 / 16%);
+}
+
+.name {
+  padding: 6px 16px;
+}
+
+.buttons {
+  display: flex;
+  gap: 8px;
+  margin-top: 16px;
 }

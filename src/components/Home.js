@@ -54,7 +54,13 @@ export default function Home() {
   };
 
   const removeLastReceipt = () => {
-    setReceipts((receipts) => receipts.slice(0, -1));
+    setReceipts((receipts) => {
+      const updated = receipts.slice(0, -1);
+      if (updated.length === 0) {
+        setShown('enter');
+      }
+      return updated;
+    });
   };
 
   const updateName = (value) => {

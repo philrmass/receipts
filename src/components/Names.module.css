@@ -13,6 +13,11 @@
   background: white;
 }
 
+.spacer {
+  flex-grow: 1;
+  flex-shrink: 1;
+}
+
 .title {
   flex-shrink: 0;
   padding: 16px 16px 4px;
@@ -22,7 +27,6 @@
 }
 
 .all {
-  flex-grow: 1;
   display: flex;
   flex-direction: column;
   align-items: flex-start;

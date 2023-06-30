@@ -65,6 +65,7 @@ export default function Names({
   return (
     <div className={styles.main}>
       <div className={styles.content}>
+        <div className={styles.spacer} />
         <div className={styles.title}>All</div>
         <div className={styles.all}>
           { renderNames(searched) }

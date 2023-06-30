@@ -1,5 +1,13 @@
-import { useState } from 'preact/hooks';
+import { useEffect, useState } from 'preact/hooks';
 import styles from './Names.module.css';
+
+function filterBySearch(names, term) {
+  const match = term.toLowerCase();
+  return names.filter((name) => {
+    const lower = name.toLowerCase();
+    return lower.indexOf(match) !== -1;
+  });
+}
 
 export default function Names({
   name,
@@ -9,6 +17,23 @@ export default function Names({
   setName,
 }) {
   const [nameStr, setNameStr] = useState(name);
+  const [searched, setSearched] = useState(names);
+  const [recentSearched, setRecentSearched] = useState(recentNames);
+
+  useEffect(() => {
+    if (nameStr) {
+      setSearched(filterBySearch(names, nameStr));
+      setRecentSearched(filterBySearch(recentNames, nameStr));
+    } else {
+      setSearched(names);
+      setRecentSearched(recentNames);
+    }
+  }, [nameStr, names, recentNames]);
+
+  const handleClear = () => {
+    setName('');
+    setNameStr('');
+  };
 
   const handleSave = (value) => {
     setName(value?.trim());
@@ -42,11 +67,11 @@ export default function Names({
       <div className={styles.content}>
         <div className={styles.title}>All</div>
         <div className={styles.all}>
-          { renderNames(names) }
+          { renderNames(searched) }
         </div>
         <div className={styles.title}>Recent</div>
         <div className={styles.recent}>
-          { renderNames(recentNames) }
+          { renderNames(recentSearched) }
         </div>
         <div className={styles.controls}>
           <input 
@@ -58,6 +83,7 @@ export default function Names({
           />
           <div className={styles.buttons}>
             <button onClick={() => onClose()}>Close</button>
+            <button onClick={() => handleClear()}>Clear</button>
             <button onClick={() => handleSave(nameStr)}>Save</button>
           </div>
         </div>

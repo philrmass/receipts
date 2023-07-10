@@ -14,6 +14,7 @@ export default function Names({
   names,
   onClose,
   recentNames,
+  removeName,
   setName,
 }) {
   const [nameStr, setNameStr] = useState(name);
@@ -51,12 +52,16 @@ export default function Names({
   const renderNames = (names) => (
     <>
       { names.map((value) => (
-        <div
-          key={value}
-          className={styles.name}
-          onClick={() => handleSave(value)}
-        >
-          {value}
+        <div key={value} className={styles.row}>
+          <button onClick={() => removeName(value)}>
+            X
+          </button>
+          <div
+            className={styles.name}
+            onClick={() => handleSave(value)}
+          >
+            {value}
+          </div>
         </div>
       )) }
     </>

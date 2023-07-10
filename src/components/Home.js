@@ -52,6 +52,11 @@ export default function Home() {
     });
   };
 
+  const removeName = (value) => {
+    setNames((all) => all.filter((n) => n !== value));
+    setRecentNames((recent) => recent.filter((n) => n !== value));
+  };
+
   const removeLastReceipt = () => {
     setReceipts((receipts) => {
       const updated = receipts.slice(0, -1);
@@ -83,6 +88,7 @@ export default function Home() {
             names={names}
             onClose={() => setShown('enter')}
             recentNames={recentNames}
+            removeName={removeName}
             setName={updateName}
           />
         );

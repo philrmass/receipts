@@ -59,6 +59,17 @@
     0 -3px 10px 0 rgb(0 0 0 / 16%);
 }
 
+.row {
+  display: flex;
+}
+
+.row button {
+  background: transparent;
+  color: var(--grey);
+  font-size: var(--font-size-small);
+  padding: 0 0 0 8px;
+}
+
 .name {
   padding: 6px 32px 6px 8px;
 }

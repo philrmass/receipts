@@ -1,3 +1,4 @@
+import { getDateString } from '../utilities';
 import Receipts from './Receipts';
 import Title from './Title';
 import styles from './Exit.module.css';
@@ -14,12 +15,10 @@ export default function Exit({
       return null;
     }
 
-    const dateStr = new Date(last.date).toLocaleDateString();
-
     return (
       <div className={styles.last}>
         <div className={styles.values}>
-          <div>{ dateStr }</div>
+          <div>{ getDateString(last.date) }</div>
           <div>{ last.name }</div>
           <span>${last.amount.toFixed(2)}</span>
         </div>

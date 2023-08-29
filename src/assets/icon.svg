@@ -1,0 +1,19 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <rect width="100%" height="100%" fill="#185028" />
+  <g fill="white" stroke="black" stroke-width="4">
+    <g transform="rotate(20 20 90)">
+      <path d="M20,10 h40 v70 h-40 v-70 h40" stroke="#888" />
+    </g>
+    <g transform="rotate(10 20 90)">
+      <path d="M20,10 h40 v70 h-40 v-70 h40" stroke="#444" />
+    </g>
+    <path d="M20,10 h40 v70 h-40 v-70 h40" />
+    <path d="M26 20 h24" />
+    <path d="M26 30 h26" stroke-width="2" />
+    <path d="M26 36 h26" stroke-width="2" />
+    <path d="M26 42 h26" stroke-width="2" />
+    <path d="M26 52 h26" stroke-width="2" />
+    <path d="M26 58 h26" stroke-width="2" />
+    <path d="M26 68 h12" />
+  </g>
+</svg>

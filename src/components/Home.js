@@ -1,5 +1,5 @@
 import { useEffect } from 'preact/hooks';
-import { useLocalStorage } from 'utilities/hooks';
+import { useLocalStorage, useVisibility } from 'utilities/hooks';
 import { byDate } from '../utilities';
 import Enter from './Enter';
 import Exit from './Exit';
@@ -13,6 +13,7 @@ export default function Home() {
   const [recentNames, setRecentNames] = useLocalStorage('rcRecentNames', []);
   const [names, setNames] = useLocalStorage('rcNames', []);
   const [receipts, setReceipts] = useLocalStorage('rcReceipts', []);
+  const isVisible = useVisibility();
 
   useEffect(() => {
     const today = new Date();
@@ -20,7 +21,7 @@ export default function Home() {
     const month = today.toLocaleDateString('en-US', { month: '2-digit' });
     const day = today.toLocaleDateString('en-US', { day: '2-digit' });
     setDate(`${year}-${month}-${day}`);
-  }, [setDate]);
+  }, [isVisible, setDate]);
 
   const addReceipt = (date, name, amount) => {
     if (date && name && amount) {

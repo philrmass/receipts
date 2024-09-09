@@ -30,9 +30,11 @@
   },
   "dependencies": {
     "gh-pages": "^5.0.0",
+    "history": "^5.3.0",
     "jest": "^29.5.0",
     "preact": "^10.1.0",
     "preact-render-to-string": "^5.1.2",
+    "preact-router": "^4.1.2",
     "utilities": "https://github.com/philrmass/utilities#v0.7.0"
   }
 }

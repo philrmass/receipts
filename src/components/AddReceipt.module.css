@@ -1,0 +1,30 @@
+.main {
+  background: transparent;
+}
+
+.date {
+  position: relative;
+}
+
+.date input {
+  position: absolute;
+  bottom: -4px;
+  visibility: hidden;
+}
+
+/*
+.inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.inputs input {
+  background: transparent;
+  border-color: transparent;
+  border: 0;
+  font-size: inherit;
+  font-family: inherit;
+}
+
+ */

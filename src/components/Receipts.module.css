@@ -8,10 +8,41 @@
 }
 
 .receipt + .receipt {
-  border-top: 1px solid var(--light-green);
+  border-top: 1px solid var(--light-grey);
 }
 
+/*
 .date {
+  visibility: hidden;
+  height: 0;
   display: flex;
   gap: 32px;
 }
+
+.button {
+  margin-top: 16px;
+}
+.main {
+  display: flex;
+  justify-content: space-between;
+  padding: 16px;
+  font-family: var(--title-font);
+  font-size: 22px;
+  box-shadow:
+    0 2px 5px 0 rgb(0 0 0 / 12%),
+    0 3px 10px 0 rgb(0 0 0 / 16%);
+}
+
+.title {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  color: var(--green);
+}
+
+.version {
+  font-size: 12px;
+  color: var(--grey);
+}
+
+*/

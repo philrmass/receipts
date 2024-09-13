@@ -1,93 +1,115 @@
-import { _useEffect, useState } from 'preact/hooks';
+import { useEffect, useState } from 'preact/hooks';
 import { Router } from 'preact-router';
 import { createHashHistory } from 'history';
-// import { v4 as uuidv4 } from 'uuid';
-import { useLocalStorage, _useVisibility } from 'utilities/hooks';
+import { v4 as uuidv4 } from 'uuid';
+import { useLocalStorage, useVisibility } from 'utilities/hooks';
 import { getIconSvgs } from 'utilities/Icon';
-// import { byDate } from '../utilities';
+import { byDate } from '../utilities';
 import AddReceipt from './AddReceipt';
+import Payees from './Payees';
 import Receipts from './Receipts';
-// import Enter from './Enter';
-//import Exit from './Exit';
-// import Names from './Names';
 import Redirect from './Redirect';
+import RemoveReceipts from './RemoveReceipts';
 
 const icons = [
   'cross',
   'plus',
 ];
 
-// ??? add /remove
-// ??? add /payees with uuid
+function getToday() {
+  const today = new Date();
+  const year = today.toLocaleDateString('en-US', { year: 'numeric' });
+  const month = today.toLocaleDateString('en-US', { month: '2-digit' });
+  const day = today.toLocaleDateString('en-US', { day: '2-digit' });
+
+  return `${year}-${month}-${day}`;
+}
+
+function byName(a, b) {
+  return a.localeCompare(b);
+}
+
+// ??? click anywhere to add, or +
+// ??? add receipt
+// ??? click - to delete
+// ??? remove receipts, add new ui
 // ??? delete unused components
-//   const id = uuidv4();
-// ??? click anywhere to add
-
 export default function Home() {
-  /*
-  const [shown, setShown] = useLocalStorage('rcShown', 'enter');
-  const [amount, setAmount] = useLocalStorage('rcAmount', null);
-  const [date, setDate] = useLocalStorage('rcDate', null);
-  const [name, setName] = useLocalStorage('rcName', null);
-  const [recentNames, setRecentNames] = useLocalStorage('rcRecentNames', []);
-  const [names, setNames] = useLocalStorage('rcNames', []);
-  */
-  const [receipts, _setReceipts] = useLocalStorage('rcReceipts', []);
-  const [payee, _setPayee] = useState({});
-  // const isVisible = useVisibility();
+  const [payees, setPayees] = useLocalStorage('rcNames', []);
+  const [receipts, setReceipts] = useLocalStorage('rcReceipts', []);
+  const [payeeIndex, setPayeeIndex] = useState(null);
+  const payee = payees[payeeIndex] ?? '';
+  const [amount, setAmount] = useState('');
+  const [date, setDate] = useState(getToday());
+  const isVisible = useVisibility();
 
-  /*
   useEffect(() => {
-    const today = new Date();
-    const year = today.toLocaleDateString('en-US', { year: 'numeric' });
-    const month = today.toLocaleDateString('en-US', { month: '2-digit' });
-    const day = today.toLocaleDateString('en-US', { day: '2-digit' });
-    setDate(`${year}-${month}-${day}`);
+    if (isVisible) {
+      setDate(getToday());
+    }
   }, [isVisible]);
-  */
 
-  const addReceipt = (_date, _name, _amount) => {
-  /*
+  const selectPayee = (payee) => {
+    const index = payees.findIndex((p) => p === payee);
+    setPayeeIndex(index);
+  };
+
+  const clearPayee = () => {
+    setPayeeIndex(null);
+  };
+
+  const updatePayees = (values, value) => {
+    const sorted = values.sort(byName);
+    const index = sorted.findIndex((p) => p === value);
+
+    setPayees(sorted);
+    setPayeeIndex(index);
+  };
+
+  const savePayee = (value) => {
+    if (value) {
+      if (payeeIndex) {
+        updatePayees([
+          ...payees.slice(0, payeeIndex),
+          value,
+          ...payees.slice(payeeIndex + 1),
+        ], value);
+      } else {
+        updatePayees([...payees, value], value);
+      }
+    }
+  };
+
+  const removePayee = (value) => {
+    setPayees((last) => last.filter((l) => l !== value));
+  };
+
+  const addReceipt = (date, name, amount) => {
     if (date && name && amount) {
-      const all = [
-        {
-          date,
-          name,
-          amount,
-        },
-        ...receipts, 
-      ];
-      setReceipts(all.sort(byDate));
-      setAmount(null);
-      setName(null);
-      */
+      const uuid = uuidv4();
+
+      setReceipts((last) => {
+        const updated = [
+          ...last, 
+          {
+            amount,
+            date,
+            name,
+            uuid,
+          },
+        ];
+
+        return updated.sort(byDate);
+      });
+    }
+  };
+
+  const removeReceipt = (uuid) => {
+    setReceipts((last) => last.filter((l) => l.uuid !== uuid));
   };
 
   /*
-    setNames((all) => {
-      const filtered = all.filter((n) => n.toLowerCase() !== name.toLowerCase());
-      const sorted = [...filtered, name].sort();
-      return sorted;
-    });
-
-    const recentMax = 5;
-    setRecentNames((recent) => {
-      const filtered = recent.filter((n) => n.toLowerCase() !== name.toLowerCase());
-      const added = [name, ...filtered];
-      const sliced = added.slice(0, recentMax);
-      return sliced;
-    });
-  };
-  */
-
-  /*
-  const removeName = (value) => {
-    setNames((all) => all.filter((n) => n !== value));
-    setRecentNames((recent) => recent.filter((n) => n !== value));
-  };
-  */
-
-  /*
+  // ??? implement remove
   const removeLastReceipt = () => {
     setReceipts((receipts) => {
       const updated = receipts.slice(0, -1);
@@ -99,68 +121,37 @@ export default function Home() {
   };
   */
 
-  /*
-  const updateName = (value) => {
-    setName(value);
-  };
-  */
-
-  /*
-  const renderComponent = () => {
-    switch (shown) {
-      case 'exit': 
-        return (
-          <Exit
-            receipts={receipts}
-            removeLastReceipt={removeLastReceipt}
-            showEnter={() => setShown('enter')}
-          />
-        );
-      case 'names': 
-        return (
-          <Names
-            name={name}
-            names={names}
-            onClose={() => setShown('enter')}
-            recentNames={recentNames}
-            removeName={removeName}
-            setName={updateName}
-          />
-        );
-      default:
-        return (
-          <Enter
-            addReceipt={addReceipt}
-            amount={amount}
-            date={date}
-            name={name}
-            receipts={receipts}
-            setAmount={setAmount}
-            setDate={setDate}
-            showExit={() => setShown('exit')}
-            showNames={() => setShown('names')}
-          />
-        );
-    }
-  };
-
-  return renderComponent();
-  */
-
   return (
     <>
       <Router history={createHashHistory()}>
         <Receipts
           path="/"
           receipts={receipts}
+          removeReceipt={removeReceipt}
         />
         <AddReceipt
           path="/add"
+          amount={amount}
           addReceipt={addReceipt}
+          clearPayee={clearPayee}
+          date={date}
           payee={payee}
+          setAmount={setAmount}
+          setDate={setDate}
         />
-        <div path="/payees">PAYEES</div>
-        <div path="/remove">REMOVE-RECEIPTS</div>
+        <Payees
+          clearPayee={clearPayee}
+          path="/payees"
+          payee={payee}
+          payees={payees}
+          removePayee={removePayee}
+          savePayee={savePayee} 
+          selectPayee={selectPayee}
+        />
+        <RemoveReceipts
+          div path="/remove"
+          receipts={receipts}
+        />
         <Redirect default to="/" />
       </Router>
       { getIconSvgs(icons) }

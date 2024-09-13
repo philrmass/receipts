@@ -1,78 +1,85 @@
-import { useState } from 'preact/hooks';
 import { route } from 'preact-router';
 import styles from './AddReceipt.module.css';
 
-function getToday() {
-  const today = new Date();
-  const year = today.toLocaleDateString('en-US', { year: 'numeric' });
-  const month = today.toLocaleDateString('en-US', { month: '2-digit' });
-  const day = today.toLocaleDateString('en-US', { day: '2-digit' });
+function validateAmount(str) {
+  const value = parseFloat(str);
 
-  return `${year}-${month}-${day}`;
+  if (Number.isNaN(value)) {
+    return '';
+  }
+  return value.toFixed(2);
 }
 
-export default function AddReceipt({ addReceipt, payee }) {
-  const [amount, setAmount] = useState('');
-  const [date, setDate] = useState(getToday());
-  console.log('PAYEE', payee);
+export default function AddReceipt({
+  addReceipt,
+  amount,
+  clearPayee,
+  date,
+  payee,
+  setAmount,
+  setDate,
+}) {
+  const isValid = validateAmount(amount) && payee;
 
   const handleAmountChange = () => {
-    console.log('SET-AMOUNT', amount, typeof amount);
-    /*
-    setAmount(amount.replace(/[^0-9.]/g, ''));
-    const value = parseFloat(str);
-    if (isNaN(value)) {
-      setAmount(null);
+    const value = parseFloat(amount);
+
+    if (Number.isNaN(value)) {
+      setAmount('');
     } else {
-      setAmount(value);
+      setAmount(value.toFixed(2));
     }
-    setAmount(amount?.toFixed(2) ?? '');
-    */
+  };
+
+  const handleClose = () => {
+    route('/');
   };
 
   const handleAdd = () => {
-    // ??? convert amount to number
+    if (isValid) {
+      addReceipt(date, payee, parseFloat(amount));
 
-    addReceipt();
-    route('/add');
+      clearPayee();
+      setAmount('');
+      handleClose(); 
+    }
   };
 
   return (
     <div className={styles.main}>
+      <div className={styles.spacer} />
       <div>
-        { payee.name ?? 'Payee' }
-      </div>
-      <div className={styles.amount}>
-        <span className={styles.dollar}>$</span>
-        <input 
-          type="number"
-          placeholder="0.00"
-          value={amount}
-          onInput={(e) => setAmount(e.target.value)}
-          onChange={() => handleAmountChange()}
-        />
-      </div>
-      <div className={styles.date}>
-        <div onClick={(e) => e.srcElement.nextElementSibling.showPicker()}>
-          { date }
+        <div onClick={() => route('/payees')}>
+          { payee || 'Payee' }
         </div>
-        <input
-          type='date'
-          onChange={(e) => setDate(e.target.value)}
-        />
-      </div>
-      <div>
-        <button
-          onClick={() => route('/')}
-        >
-          Cancel
-        </button>
-
-        <button
-          onClick={handleAdd}
-        >
-          Add
-        </button>
+        <div className={styles.amount}>
+          <span>$</span>
+          <input 
+            type="number"
+            placeholder="0.00"
+            value={amount}
+            onInput={(e) => setAmount(e.target.value)}
+            onChange={() => handleAmountChange()}
+          />
+        </div>
+        <div className={styles.date}>
+          <div onClick={(e) => e.srcElement.nextElementSibling.showPicker()}>
+            { date }
+          </div>
+          <input
+            type='date'
+            onChange={(e) => setDate(e.target.value)}
+          />
+        </div>
+        <div>
+          <button onClick={handleClose}>Cancel</button>
+          <button
+            disabled={!isValid}
+            onClick={handleAdd}
+          >
+            Add
+          </button>
+        </div>
       </div>
     </div>
   );

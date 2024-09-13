@@ -20,12 +20,15 @@ body {
 }
 
 button {
+  /*
   background: var(--green);
   border: 0;
   border-radius: 4px;
   color: white;
   font-size: var(--font-size);
   padding: 8px 16px;
+  */
+  font: inherit;
 }
 
 button:disabled {

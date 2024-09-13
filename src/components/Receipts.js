@@ -2,18 +2,20 @@ import { route } from 'preact-router';
 import { getDateString } from '../utilities';
 import styles from './Receipts.module.css';
 
-export default function Receipts({ receipts }) {
-  const renderReceipt = ({ date, name, amount }) => (
+export default function Receipts({ receipts, removeReceipt }) {
+  const renderReceipt = ({ date, name, amount, uuid }) => (
     <div className={styles.receipt}>
       <div>{name}</div>
       <div>{`$${amount.toFixed(2)}`}</div>
       <div>{getDateString(date)}</div>
+      <button onClick={() => removeReceipt(uuid)}>
+        X
+      </button>
     </div>
   );
 
   return (
     <div>
-      <div>Receipts</div>
       <div className={styles.receipts}>
         { receipts.map((receipt) => renderReceipt(receipt)) }
       </div>

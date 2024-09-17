@@ -29,11 +29,11 @@ function byName(a, b) {
   return a.localeCompare(b);
 }
 
+// ??? delete unused components
 // ??? click anywhere to add, or +
-// ??? add receipt
+// ??? improve add
 // ??? click - to delete
 // ??? remove receipts, add new ui
-// ??? delete unused components
 export default function Home() {
   const [payees, setPayees] = useLocalStorage('rcNames', []);
   const [receipts, setReceipts] = useLocalStorage('rcReceipts', []);
@@ -127,7 +127,6 @@ export default function Home() {
         <Receipts
           path="/"
           receipts={receipts}
-          removeReceipt={removeReceipt}
         />
         <AddReceipt
           path="/add"
@@ -151,6 +150,7 @@ export default function Home() {
         <RemoveReceipts
           div path="/remove"
           receipts={receipts}
+          removeReceipt={removeReceipt}
         />
         <Redirect default to="/" />
       </Router>

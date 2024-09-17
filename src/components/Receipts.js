@@ -1,21 +1,28 @@
 import { route } from 'preact-router';
+import Icon from 'utilities/icon';
 import { getDateString } from '../utilities';
+import { version } from '../../package.json';
 import styles from './Receipts.module.css';
 
-export default function Receipts({ receipts, removeReceipt }) {
+export default function Receipts({ receipts }) {
   const renderReceipt = ({ date, name, amount, uuid }) => (
-    <div className={styles.receipt}>
+    <div key={uuid} className={styles.receipt}>
       <div>{name}</div>
-      <div>{`$${amount.toFixed(2)}`}</div>
-      <div>{getDateString(date)}</div>
-      <button onClick={() => removeReceipt(uuid)}>
-        X
-      </button>
+      <div className={styles.details}>
+        <div>{`$${amount.toFixed(2)}`}</div>
+        <div>{getDateString(date)}</div>
+      </div>
     </div>
   );
 
   return (
-    <div>
+    <div className={styles.main}>
+      <div className={styles.header}>
+        Receipts
+        <div className={styles.version}>
+          {`v${version}`}
+        </div>
+      </div>
       <div className={styles.receipts}>
         { receipts.map((receipt) => renderReceipt(receipt)) }
       </div>
@@ -23,45 +30,14 @@ export default function Receipts({ receipts, removeReceipt }) {
         className={styles.add}
         onClick={() => route('/add')}
       >
-        +
+        <Icon name="plus" />
       </button>
       <button
         className={styles.remove}
-        onClick={() => route('/add')}
+        onClick={() => route('/remove')}
       >
-        -
+        <Icon name="cross" />
       </button>
     </div>
   );
 }
-/*
-import { version } from '../../package.json';
-import styles from './Title.module.css';
-
-export default function Title({
-  buttonEnabled = true,
-  showEnter,
-  showExit,
-}) {
-  return (
-    <div className={styles.main}>
-      <div className={styles.title}>
-        <div>Receipts</div>
-        <div className={styles.version}>
-          {`v${version}`}
-        </div>
-      </div>
-      { showExit && (
-        <button disabled={!buttonEnabled} onClick={showExit}>
-          Remove Receipts
-        </button>
-      )}
-      { showEnter && (
-        <button disabled={!buttonEnabled} onClick={showEnter}>
-          Add Receipts
-        </button>
-      ) }
-    </div>
-  );
-}
-*/

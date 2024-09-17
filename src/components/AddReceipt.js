@@ -47,8 +47,8 @@ export default function AddReceipt({
 
   return (
     <div className={styles.main}>
-      <div className={styles.spacer} />
-      <div>
+      <div className={styles.top} />
+      <div className={styles.content}>
         <div onClick={() => route('/payees')}>
           { payee || 'Payee' }
         </div>
@@ -81,6 +81,7 @@ export default function AddReceipt({
           </button>
         </div>
       </div>
+      <div className={styles.bottom} />
     </div>
   );
 }

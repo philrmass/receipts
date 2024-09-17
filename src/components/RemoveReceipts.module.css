@@ -1,3 +1,62 @@
 .main {
-  background: #dfe;
+  position: fixed;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  padding: 12px 16px;;
+  color: var(--green);
+  font-family: var(--title-font);
+  font-size: var(--font-size-header);
+  border-bottom: 1px solid var(--green);
+}
+
+.version {
+  color: var(--grey);
+  font-size: var(--font-size-version);
+}
+
+.receipts {
+  padding: 12px 16px 16px;
+  overflow-y: auto;
+}
+
+.receipt {
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--light-grey);
+}
+
+.details {
+  display: flex;
+  gap: 16px;
+  justify-content: space-between;
+}
+
+.receipt + .receipt {
+  padding-top: 8px;
+}
+
+.remove {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: 50%;
+  background: var(--green);
+  color: var(--white);
+  box-shadow: 0 0 4px 8px var(--white);
+}
+
+.done {
+  display: flex;
+  justify-content: center;
+  padding: 8px;
+  background: var(--green);
 }

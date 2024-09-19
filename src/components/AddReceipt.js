@@ -28,6 +28,7 @@ export default function AddReceipt({
       setAmount('');
     } else {
       setAmount(value.toFixed(2));
+      // ??? blur
     }
   };
 
@@ -46,32 +47,40 @@ export default function AddReceipt({
   };
 
   return (
-    <div className={styles.main}>
+    <div
+      className={styles.main}
+      onClick={handleClose}
+    >
       <div className={styles.top} />
-      <div className={styles.content}>
+      <div
+        className={styles.content}
+        onClick={(e) => e.stopPropagation()}
+      >
         <div onClick={() => route('/payees')}>
           { payee || 'Payee' }
         </div>
-        <div className={styles.amount}>
-          <span>$</span>
-          <input 
-            type="number"
-            placeholder="0.00"
-            value={amount}
-            onInput={(e) => setAmount(e.target.value)}
-            onChange={() => handleAmountChange()}
-          />
-        </div>
-        <div className={styles.date}>
-          <div onClick={(e) => e.srcElement.nextElementSibling.showPicker()}>
-            { date }
+        <div className={styles.row}>
+          <div className={styles.amount}>
+            <span>$</span>
+            <input 
+              type="number"
+              placeholder="0.00"
+              value={amount}
+              onInput={(e) => setAmount(e.target.value)}
+              onChange={() => handleAmountChange()}
+            />
           </div>
-          <input
-            type='date'
-            onChange={(e) => setDate(e.target.value)}
-          />
+          <div className={styles.date}>
+            <div onClick={(e) => e.srcElement.nextElementSibling.showPicker()}>
+              { date }
+            </div>
+            <input
+              type='date'
+              onChange={(e) => setDate(e.target.value)}
+            />
+          </div>
         </div>
-        <div>
+        <div className={styles.buttons}>
           <button onClick={handleClose}>Cancel</button>
           <button
             disabled={!isValid}

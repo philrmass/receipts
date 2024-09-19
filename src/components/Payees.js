@@ -71,7 +71,7 @@ export default function Payees({
     <div className={styles.main}>
       <div className={styles.payees}>
         <div className={styles.spacer} />
-        <div>
+        <div className={styles.list}>
           { matched.map((payee, index) => renderPayee(payee, index)) }
         </div>
       </div>

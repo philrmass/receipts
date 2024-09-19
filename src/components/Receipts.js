@@ -23,7 +23,10 @@ export default function Receipts({ receipts }) {
           {`v${version}`}
         </div>
       </div>
-      <div className={styles.receipts}>
+      <div
+        className={styles.receipts}
+        onClick={() => route('/add')}
+      >
         { receipts.map((receipt) => renderReceipt(receipt)) }
       </div>
       <button

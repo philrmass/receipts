@@ -50,6 +50,12 @@
   background-attachment: local, local, scroll, scroll;
 }
 
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
 .search {
   display: flex;
   gap: 8px;

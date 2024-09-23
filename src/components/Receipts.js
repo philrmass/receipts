@@ -30,13 +30,13 @@ export default function Receipts({ receipts }) {
         { receipts.map((receipt) => renderReceipt(receipt)) }
       </div>
       <button
-        className={styles.add}
+        className={`round ${styles.add}`}
         onClick={() => route('/add')}
       >
         <Icon name="plus" />
       </button>
       <button
-        className={styles.remove}
+        className={`round ${styles.remove}`}
         onClick={() => route('/remove')}
       >
         <Icon name="cross" />

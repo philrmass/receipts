@@ -30,10 +30,11 @@ function byName(a, b) {
 }
 
 // ??? delete unused components
-// ??? click anywhere to add, or +
-// ??? improve add
-// ??? click - to delete
-// ??? remove receipts, add new ui
+// ??? fix payees button styling
+// ??? set payee on click if showing 0 or 1 payee
+// ??? improve remove receipts
+// ??? set $ as negative button
+// ??? disable remove if no receipts
 export default function Home() {
   const [payees, setPayees] = useLocalStorage('rcNames', []);
   const [receipts, setReceipts] = useLocalStorage('rcReceipts', []);

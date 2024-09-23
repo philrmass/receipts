@@ -15,6 +15,7 @@ export default function Payees({
   clearPayee,
   payee,
   payees,
+  removePayee,
   savePayee,
   selectPayee,
 }) {
@@ -62,8 +63,18 @@ export default function Payees({
     </button>
   */
   const renderPayee = (payee) => (
-    <div onClick={() => selectPayee(payee)}>
-      { payee }
+    <div className={styles.payee}>
+      <button
+        onClick={() => removePayee(payee)}
+      >
+      <Icon 
+        className={styles.icon}
+        name="cross"
+      />
+      </button>
+      <div onClick={() => selectPayee(payee)}>
+        { payee }
+      </div>
     </div>
   );
 
@@ -90,7 +101,7 @@ export default function Payees({
           <Icon name="cross" className={styles.icon} />
         </button>
       </div>
-      <div>
+      <div className={styles.buttons}>
         <button onClick={handleClose}>Close</button>
         <button onClick={handleSave}>Save</button>
       </div>

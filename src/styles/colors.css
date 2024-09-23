@@ -1,14 +1,9 @@
 :root {
+  --dark-grey: #484c50;
   --green: #187828;
   --grey: #808488;
   --light-grey: #a0a4ab;
+  --shadow: #dce0e7;
   --text: #282828;
   --white: #fdfdfd;
-
-  /*
-   * ??? remvoe
-  --dark-grey: #505055;
-  --red: #902818;
-  --off-white: #e8ecf0;
-  */
 }

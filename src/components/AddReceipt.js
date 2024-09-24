@@ -28,20 +28,18 @@ export default function AddReceipt({
       setAmount('');
     } else {
       setAmount(value.toFixed(2));
-      // ??? blur
     }
   };
 
   const handleClose = () => {
+    clearPayee();
+    setAmount('');
     route('/');
   };
 
   const handleAdd = () => {
     if (isValid) {
       addReceipt(date, payee, parseFloat(amount));
-
-      clearPayee();
-      setAmount('');
       handleClose(); 
     }
   };

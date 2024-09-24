@@ -3,7 +3,7 @@
   inset: 0;
   display: flex;
   flex-direction: column;
-  margin: 24px;
+  padding: 24px;
   gap: 16px;
 }
 
@@ -16,49 +16,31 @@
   flex-grow: 1;
   flex-direction: column;
   overflow-y: auto;
-  background:
-    linear-gradient(var(--white), transparent),
-    linear-gradient(transparent, var(--white)) center bottom,
-    linear-gradient(var(--shadow), transparent),
-    linear-gradient(transparent, var(--shadow)) center bottom;
-  background-repeat: no-repeat;
-  background-size: 100% 24px, 100% 24px, 100% 8px, 100% 8px;
-  background-attachment: local, local, scroll, scroll;
 }
 
 .payee {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 4px;
 }
 
-.payee button {
-  background: transparent;
-}
-
-.payee .icon {
-  width: 48px;
-  background: transparent;
-  color: var(--text);
-  color: cyan;
-  border: 1px solid red;
-
-  /* ??? fix button styling
-  width: 48px;
-  aspect-ratio: 1;
+.x {
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 50%;
-  box-shadow: 0 0 4px 8px var(--white);
-  color: red;
-  */
+  padding: 0;
+  background: transparent;
+}
+
+.x .icon {
+  width: 32px;
+  color: var(--text);
 }
 
 .list {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 4px;
 }
 
 .search {
@@ -74,28 +56,12 @@
   border-radius: 5px;
 }
 
-.search button {
-  color: #def;
-  background: transparent;
-  border: 1px solid blue;
-}
-
-.search .icon {
-  width: 32px;
-  border: 1px solid #0f0;
-  color: red;
-
-  /* ??? fix button styling
-   */
-}
-
 .buttons {
-  border: 1px solid orange;
+  display: flex;
+  gap: 8px;
 }
 
 .buttons button {
-  border: 1px solid cyan;
-
-  /* ??? fix button styling
-   */
+  flex-grow: 1;
+  font-size: var(--font-size-header);
 }

@@ -7,13 +7,20 @@
 
 .header {
   display: flex;
+  justify-content: space-between;
   align-items: flex-end;
   gap: 8px;
-  padding: 12px 16px;;
+  padding: 18px 24px;
+  border-bottom: 1px solid var(--green);
+}
+
+.title {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
   color: var(--green);
   font-family: var(--title-font);
   font-size: var(--font-size-header);
-  border-bottom: 1px solid var(--green);
 }
 
 .version {
@@ -21,24 +28,38 @@
   font-size: var(--font-size-version);
 }
 
+.totals {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 37px;
+  font-size: var(--font-size-version);
+  text-align: right;
+}
+
 .receipts {
-  padding: 12px 16px 16px;
+  padding: 18px 24px 24px;
   overflow-y: auto;
 }
 
 .receipt {
+  line-height: 1.2;
   padding-bottom: 8px;
   border-bottom: 1px solid var(--light-grey);
+}
+
+.receipt + .receipt {
+  padding-top: 8px;
+}
+
+.receipts .receipt:last-child {
+  margin-bottom: 64px;
 }
 
 .details {
   display: flex;
   gap: 16px;
   justify-content: space-between;
-}
-
-.receipt + .receipt {
-  padding-top: 8px;
 }
 
 .main button {
@@ -49,12 +70,12 @@
 
 .add {
   position: fixed;
-  left: 16px;
-  bottom: 16px;
+  left: 24px;
+  bottom: 24px;
 }
 
 .remove {
   position: fixed;
-  right: 16px;
-  bottom: 16px;
+  right: 24px;
+  bottom: 24px;
 }

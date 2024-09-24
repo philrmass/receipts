@@ -56,22 +56,27 @@ export default function Payees({
     clearPayee();
   };
 
-  // ??? add delete payee
-  /*
-    <button onClick={() => removePayee(payee)}>
-      X
-    </button>
-  */
-  const renderPayee = (payee) => (
-    <div className={styles.payee}>
-      <button
-        onClick={() => removePayee(payee)}
-      >
+  const handleListClick = () => {
+    if (matched.length === 0 || matched.length === 1) {
+      handleSave();
+    }
+  };
+
+  const renderXButton = (onClick) => (
+    <button
+      className={styles.x}
+      onClick={onClick}
+    >
       <Icon 
         className={styles.icon}
         name="cross"
       />
-      </button>
+    </button>
+  );
+
+  const renderPayee = (payee) => (
+    <div className={styles.payee}>
+      { renderXButton(() => removePayee(payee)) }
       <div onClick={() => selectPayee(payee)}>
         { payee }
       </div>
@@ -80,7 +85,10 @@ export default function Payees({
 
   return (
     <div className={styles.main}>
-      <div className={styles.payees}>
+      <div
+        className={`shadows ${styles.payees}`}
+        onClick={handleListClick}
+      >
         <div className={styles.spacer} />
         <div className={styles.list}>
           { matched.map((payee, index) => renderPayee(payee, index)) }
@@ -94,12 +102,7 @@ export default function Payees({
           onInput={(e) => setValue(e.target.value)}
           onKeyDown={(e) => handleKeyDown(e.key)}
         />
-        <button
-          className={styles.clear}
-          onClick={handleClear}
-        >
-          <Icon name="cross" className={styles.icon} />
-        </button>
+        { renderXButton(handleClear) }
       </div>
       <div className={styles.buttons}>
         <button onClick={handleClose}>Close</button>

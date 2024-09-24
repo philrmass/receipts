@@ -29,12 +29,10 @@ function byName(a, b) {
   return a.localeCompare(b);
 }
 
-// ??? delete unused components
-// ??? fix payees button styling
-// ??? set payee on click if showing 0 or 1 payee
-// ??? improve remove receipts
 // ??? set $ as negative button
-// ??? disable remove if no receipts
+// ??? improve remove receipts
+// ??? - grey out when clicked, scroll up
+// ??? - done removes all greyed out rectipts
 export default function Home() {
   const [payees, setPayees] = useLocalStorage('rcNames', []);
   const [receipts, setReceipts] = useLocalStorage('rcReceipts', []);

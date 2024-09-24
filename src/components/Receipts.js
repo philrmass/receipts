@@ -5,6 +5,8 @@ import { version } from '../../package.json';
 import styles from './Receipts.module.css';
 
 export default function Receipts({ receipts }) {
+  const total = receipts.reduce((sum, { amount }) => sum + amount, 0);
+
   const renderReceipt = ({ date, name, amount, uuid }) => (
     <div key={uuid} className={styles.receipt}>
       <div>{name}</div>
@@ -18,13 +20,19 @@ export default function Receipts({ receipts }) {
   return (
     <div className={styles.main}>
       <div className={styles.header}>
-        Receipts
-        <div className={styles.version}>
-          {`v${version}`}
+        <div className={styles.title}>
+          Receipts
+          <div className={styles.version}>
+            {`v${version}`}
+          </div>
+        </div>
+        <div className={styles.totals}>
+          <div>{ `${receipts.length} receipts` }</div>
+          <div>{ `$${total.toFixed(2)}` }</div>
         </div>
       </div>
       <div
-        className={styles.receipts}
+        className={`shadows ${styles.receipts}`}
         onClick={() => route('/add')}
       >
         { receipts.map((receipt) => renderReceipt(receipt)) }
@@ -37,6 +45,7 @@ export default function Receipts({ receipts }) {
       </button>
       <button
         className={`round ${styles.remove}`}
+        disabled={receipts.length === 0}
         onClick={() => route('/remove')}
       >
         <Icon name="cross" />

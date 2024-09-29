@@ -22,7 +22,8 @@ export default function RemoveReceipts({ receipts, removeReceipt }) {
   }, [receipts]);
 
   const handleClick = (selectedUuid) => {
-    setDone((last) => ({ ...last, [selectedUuid]: true }));
+    const value = !done[selectedUuid];
+    setDone((last) => ({ ...last, [selectedUuid]: value }));
 
     const found = receipts.findIndex(({ uuid }) => uuid === selectedUuid);
     const next = receipts.findIndex(({ uuid }, index) => index > found && !done[uuid]);

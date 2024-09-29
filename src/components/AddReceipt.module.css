@@ -36,6 +36,12 @@
   width: 6em;
 }
 
+.amount button {
+  background: transparent;
+  color: var(--text);
+  padding: 0;
+}
+
 .amount input {
   width: 100%;
   border: 0;

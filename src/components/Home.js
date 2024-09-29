@@ -29,10 +29,6 @@ function byName(a, b) {
   return a.localeCompare(b);
 }
 
-// ??? set $ as negative button
-// ??? improve remove receipts
-// ??? - grey out when clicked, scroll up
-// ??? - done removes all greyed out rectipts
 export default function Home() {
   const [payees, setPayees] = useLocalStorage('rcNames', []);
   const [receipts, setReceipts] = useLocalStorage('rcReceipts', []);
@@ -106,19 +102,6 @@ export default function Home() {
   const removeReceipt = (uuid) => {
     setReceipts((last) => last.filter((l) => l.uuid !== uuid));
   };
-
-  /*
-  // ??? implement remove
-  const removeLastReceipt = () => {
-    setReceipts((receipts) => {
-      const updated = receipts.slice(0, -1);
-      if (updated.length === 0) {
-        setShown('enter');
-      }
-      return updated;
-    });
-  };
-  */
 
   return (
     <>

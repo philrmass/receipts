@@ -1,38 +1,66 @@
+import { useEffect, useState } from 'preact/hooks';
 import { route } from 'preact-router';
-import { getDateString } from '../utilities';
+import Receipt from './Receipt';
+import Totals from './Totals';
 import styles from './RemoveReceipts.module.css';
 
+function scrollIntoCenter(uuid) {
+  if (!uuid) {
+    return;
+  }
+
+  const elem = document.getElementById(uuid);
+  elem.scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
 export default function RemoveReceipts({ receipts, removeReceipt }) {
-  const renderReceipt = ({ date, name, amount, uuid }) => (
-    <div key={uuid} className={styles.receipt}>
-      <div className={styles.details}>
-        <div>{name}</div>
-        <button
-          className={styles.remove}
-          onClick={() => removeReceipt(uuid)}
-        >
-          X
-        </button>
-      </div>
-      <div className={styles.details}>
-        <div>{`$${amount.toFixed(2)}`}</div>
-        <div>{getDateString(date)}</div>
-      </div>
-    </div>
-  );
+  const [done, setDone] = useState({});
+  const notDoneReceipts = receipts.filter(({ uuid }) => !done[uuid]);
+
+  useEffect(() => {
+    scrollIntoCenter(receipts[0]?.uuid);
+  }, [receipts]);
+
+  const handleClick = (selectedUuid) => {
+    setDone((last) => ({ ...last, [selectedUuid]: true }));
+
+    const found = receipts.findIndex(({ uuid }) => uuid === selectedUuid);
+    const next = receipts.findIndex(({ uuid }, index) => index > found && !done[uuid]);
+    scrollIntoCenter(receipts[next]?.uuid);
+  };
+
+  const handleDone= () => {
+    receipts.map(({ uuid }) => {
+      if (done[uuid]) {
+        removeReceipt(uuid);
+      }
+    });
+    route('/');
+  };
 
   return (
-    <div className={styles.main}>
-      <div className={styles.receipts}>
-        { receipts.map((receipt) => renderReceipt(receipt)) }
+    <>
+      <div className={styles.main}>
+        <div className={styles.receipts}>
+          { receipts.map((receipt) => (
+            <Receipt
+              key={receipt.uuid}
+              id={receipt.uuid}
+              receipt={receipt}
+              setBackground={!done[receipt.uuid]}
+              onClick={() => handleClick(receipt.uuid)}
+            />
+          )) }
+        </div>
+        <div className={styles.done}>
+          <button onClick={handleDone}>
+            Done
+          </button>
+          <div className={styles.totals}>
+            <Totals receipts={notDoneReceipts} />
+          </div>
+        </div>
       </div>
-      <div className={styles.done}>
-        <button
-          onClick={() => route('/')}
-        >
-          Done
-        </button>
-      </div>
-    </div>
+    </>
   );
 }

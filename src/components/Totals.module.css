@@ -1,0 +1,8 @@
+.totals {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 37px;
+  font-size: var(--font-size-version);
+  text-align: right;
+}

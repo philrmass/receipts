@@ -1,4 +1,5 @@
 import { route } from 'preact-router';
+import { useLocalStorage } from 'utilities/hooks';
 import styles from './AddReceipt.module.css';
 
 function validateAmount(str) {
@@ -19,6 +20,7 @@ export default function AddReceipt({
   setAmount,
   setDate,
 }) {
+  const [isNegative, setIsNegative] = useLocalStorage('rcNeg', false);
   const isValid = validateAmount(amount) && payee;
 
   const handleAmountChange = () => {
@@ -33,13 +35,15 @@ export default function AddReceipt({
 
   const handleClose = () => {
     clearPayee();
+    setIsNegative(false);
     setAmount('');
     route('/');
   };
 
   const handleAdd = () => {
     if (isValid) {
-      addReceipt(date, payee, parseFloat(amount));
+      const amt = (isNegative ? -1 : 1) * parseFloat(amount);
+      addReceipt(date, payee, amt);
       handleClose(); 
     }
   };
@@ -59,7 +63,9 @@ export default function AddReceipt({
         </div>
         <div className={styles.row}>
           <div className={styles.amount}>
-            <span>$</span>
+            <button onClick={() => setIsNegative((last) => !last)}>
+              { isNegative ? '$-' : '$' }
+            </button>
             <input 
               type="number"
               placeholder="0.00"

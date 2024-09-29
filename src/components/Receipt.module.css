@@ -1,0 +1,30 @@
+.wrap {
+  padding: 0 24px;
+}
+
+.background {
+  background: var(--white);
+}
+
+.receipt {
+  height: var(--receipt-height);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-top: 1px solid var(--light-grey);
+  line-height: 1.2;
+}
+
+.name {
+  white-space: pre;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.details {
+  display: flex;
+  gap: 16px;
+  justify-content: space-between;
+}
+

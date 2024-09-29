@@ -28,38 +28,14 @@
   font-size: var(--font-size-version);
 }
 
-.totals {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: 37px;
-  font-size: var(--font-size-version);
-  text-align: right;
-}
-
 .receipts {
-  padding: 18px 24px 24px;
+  padding-top: 18px;
+  padding-bottom: 80px;
   overflow-y: auto;
 }
 
-.receipt {
-  line-height: 1.2;
-  padding-bottom: 8px;
+.receipts > div:last-child > div {
   border-bottom: 1px solid var(--light-grey);
-}
-
-.receipt + .receipt {
-  padding-top: 8px;
-}
-
-.receipts .receipt:last-child {
-  margin-bottom: 64px;
-}
-
-.details {
-  display: flex;
-  gap: 16px;
-  justify-content: space-between;
 }
 
 .main button {

@@ -3,60 +3,40 @@
   inset: 0;
   display: flex;
   flex-direction: column;
-}
-
-.header {
-  display: flex;
-  align-items: flex-end;
-  gap: 8px;
-  padding: 12px 16px;;
-  color: var(--green);
-  font-family: var(--title-font);
-  font-size: var(--font-size-header);
-  border-bottom: 1px solid var(--green);
-}
-
-.version {
-  color: var(--grey);
-  font-size: var(--font-size-version);
-}
-
-.receipts {
-  padding: 12px 16px 16px;
   overflow-y: auto;
 }
 
-.receipt {
-  padding-bottom: 8px;
+.receipts {
+  background: var(--very-light-grey);
+  padding: 50vh 0;
+}
+
+.receipts > div:last-child > div {
   border-bottom: 1px solid var(--light-grey);
 }
 
-.details {
-  display: flex;
-  gap: 16px;
-  justify-content: space-between;
-}
-
-.receipt + .receipt {
-  padding-top: 8px;
-}
-
-.remove {
-  width: 32px;
-  height: 32px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 0;
-  border-radius: 50%;
-  background: var(--green);
-  color: var(--white);
-  box-shadow: 0 0 4px 8px var(--white);
-}
-
 .done {
+  height: var(--receipt-height);
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: calc(50vh + 0.5 * var(--receipt-height) + 1px);
   display: flex;
-  justify-content: center;
-  padding: 8px;
-  background: var(--green);
+  gap: 8px;
+  margin: 0 24px;
+  background: var(--very-light-grey);
+}
+
+.done button {
+  flex-grow: 1;
+  font-size: var(--font-size-header);
+}
+
+.totals {
+  flex-grow: 1;
+  padding: 18px 12px;
+}
+
+.totals > * {
+  height: 100%;
 }

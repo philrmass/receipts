@@ -131,7 +131,7 @@ export default function Home() {
         />
         <RemoveReceipts
           div path="/remove"
-          receipts={receipts}
+          initialReceipts={receipts}
           removeReceipt={removeReceipt}
         />
         <Redirect default to="/" />

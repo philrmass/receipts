@@ -13,9 +13,14 @@ function scrollIntoCenter(uuid) {
   elem.scrollIntoView({ behavior: 'smooth', block: 'center' });
 }
 
-export default function RemoveReceipts({ receipts, removeReceipt }) {
+export default function RemoveReceipts({ initialReceipts, removeReceipt }) {
   const [done, setDone] = useState({});
+  const [receipts, setReceipts] = useState([]);
   const notDoneReceipts = receipts.filter(({ uuid }) => !done[uuid]);
+
+  useEffect(() => {
+    setReceipts(initialReceipts.slice().reverse());
+  }, [initialReceipts]);
 
   useEffect(() => {
     scrollIntoCenter(receipts[0]?.uuid);

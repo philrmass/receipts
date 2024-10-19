@@ -57,8 +57,11 @@ export default function Payees({
   };
 
   const handleListClick = () => {
-    if (matched.length === 0 || matched.length === 1) {
+    if (matched.length === 0) {
       handleSave();
+    } else if (matched.length === 1) {
+      selectPayee(matched[0]);
+      handleClose(); 
     }
   };
 

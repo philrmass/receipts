@@ -1,4 +1,4 @@
-export default (config, env, helpers) => {
+module.exports = (config, env, helpers) => {
   const isDev = Boolean(process.env.DEV);
   config.output.publicPath = isDev ? '' : '/receipts/';
   console.log(`Using ${isDev ? 'dev' : 'prod'} publicPath='${config.output.publicPath}'`);

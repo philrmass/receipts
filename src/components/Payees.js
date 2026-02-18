@@ -34,7 +34,7 @@ export default function Payees({
     }
   }, [payees, value]);
 
-  const handleSave = () => {
+  const handleAction = () => {
     savePayee(value);
     handleClose(); 
   };
@@ -45,7 +45,7 @@ export default function Payees({
 
   const handleKeyDown = (key) => {
     if (key === 'Enter') {
-      handleSave();
+      handleAction();
     } else if (key === 'Escape') {
       handleClose(); 
     }
@@ -58,11 +58,23 @@ export default function Payees({
 
   const handleListClick = () => {
     if (matched.length === 0) {
-      handleSave();
+      handleAction();
     } else if (matched.length === 1) {
       selectPayee(matched[0]);
       handleClose(); 
     }
+  };
+
+  const getActionLabel = () => {
+    if (matched.includes(value)) {
+      return 'Set';
+    }
+
+    if (payee) {
+      return (value !== payee) ? 'Save' : 'Set';
+    }
+
+    return 'Add';
   };
 
   const renderXButton = (onClick) => (
@@ -109,7 +121,9 @@ export default function Payees({
       </div>
       <div className={styles.buttons}>
         <button onClick={handleClose}>Close</button>
-        <button onClick={handleSave}>Save</button>
+        <button disabled={!value} onClick={handleAction}>
+          { getActionLabel() }
+        </button>
       </div>
     </div>
   );

@@ -70,7 +70,13 @@ export default function Home() {
           ...payees.slice(payeeIndex + 1),
         ], value);
       } else {
-        updatePayees([...payees, value], value);
+        const exists = payees.includes(value);
+
+        if (exists) {
+          updatePayees(payees, value);
+        } else {
+          updatePayees([...payees, value], value);
+        }
       }
     }
   };
